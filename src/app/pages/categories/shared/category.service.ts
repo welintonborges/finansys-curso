@@ -11,7 +11,7 @@ import { map, catchError, flatMap} from 'rxjs/operators';
 })
 export class CategoryService {
 
-  private apiPath:string = "api/categories"
+  private apiPath: string = "api/categories"
 
   constructor(private http: HttpClient) { }
 
@@ -56,8 +56,8 @@ export class CategoryService {
     )
   }
 
-  delete(id: number): Observable<Category>{
-    const url = '${this.apiPath}/${id}';
+  delete(id: number): Observable <Category>{
+    const url = this.apiPath + "/" + id;
 
     return this.http.delete(url).pipe(
       catchError(this.handleError),
