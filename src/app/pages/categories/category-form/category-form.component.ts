@@ -55,9 +55,10 @@ export class CategoryFormComponent implements OnInit , AfterContentChecked {
 
    private setCurrentAction(){
      if(this.route.snapshot.url[0].path == 'new')
-        this.currentAction = 'new'
+        this.currentAction = 'new';
         else
-        this.currentAction = 'edit'
+        this.currentAction = 'edit';
+        console.log("aqui -->", this.currentAction)
     }
       
       
@@ -85,7 +86,7 @@ export class CategoryFormComponent implements OnInit , AfterContentChecked {
       }
 
       private setPageTitle() {
-          if(this.currentAction = 'new'){
+          if(this.currentAction == 'new'){
             this.pageTitle = 'Cadastro de Nova Categoria'
           }else{
             const categoryName = this.category.name || ''
