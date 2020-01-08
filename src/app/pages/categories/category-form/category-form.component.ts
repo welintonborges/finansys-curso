@@ -47,7 +47,7 @@ export class CategoryFormComponent implements OnInit , AfterContentChecked {
    submitForm(){
       this.submittingForm = true;
 
-      if(this.currentAction = 'new')
+      if(this.currentAction == 'new')
           this.createCategory();
       else
           this.updateCategory();
@@ -105,8 +105,15 @@ export class CategoryFormComponent implements OnInit , AfterContentChecked {
       }
        
       private updateCategory() {
-        
+        const category: Category = Object.assign(new Category(), this.category);
+
+        this.categoryService.update(category)
+        .subscribe(
+          category => this.actionsFormSucess(category),
+          error => this.actionsFormError(error)
+        )
       }
+      
       private actionsFormSucess(category: Category){
          toastr.success('Solicitação processada com sucesso!');
 

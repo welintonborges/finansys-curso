@@ -2,14 +2,14 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
         <li class="breadcrumb-item"><a routerLink="/categories"> Categorias</a></li>
-        <li class="breadcrumb-item active ">Formulario de Categoria</li>
+        <li class="breadcrumb-item active ">{{ pageTitle }}</li>
     </ol> 
  </nav> 
  
  <div class="row">
      <div class="col-md">
       <h1 class="h2 border-left pl-2">
-         Formulario de categoria {{ this.currentAction }}
+          {{ pageTitle }}
       </h1>
      </div>           
      <div class="col-md">
@@ -42,9 +42,36 @@
                 <input type="text" class="form-control" id="description" formControlName="description">
             </div>
         </div>
+          <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputCity">City</label>
+              <input type="text" class="form-control" id="inputCity">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputState">State</label>
+              <select id="inputState" class="form-control">
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="inputZip">Zip</label>
+              <input type="text" class="form-control" id="inputZip">
+            </div>
+          </div>
     </div>
 </div>
 
+<div class="alert alert-danger mt-4" *ngIf="serveErrorMessages">
+      <strong>Erro no servidor:</strong>
+        <ul>
+            <li *ngFor="let error of serveErrorMessages">{{error}}</li>
+        </ul>
+</div>
     <button  [disabled]="submittingForm || categoryForm.invalid" type="submit" class="btn btn-primary btn lg float-right mt-2">
         Salvar
     </button>
