@@ -64,7 +64,7 @@ export class CategoryService {
        map(() => null)
     )
   }
-
+ 
   private handleError(error: any): Observable<any>{
     console.log("ERRO NA REQUISIÇÃO ->", error);
     return throwError(error);
