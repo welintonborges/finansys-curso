@@ -14,7 +14,7 @@ import { Category } from '../shared/category.model';
 
 @Component({
   selector: 'app-category-form',
-  templateUrl: './category-form.component.html',
+  templateUrl: './category-form.component.html', 
   styleUrls: ['./category-form.component.css']
 })
 export class CategoryFormComponent implements OnInit , AfterContentChecked {
@@ -47,7 +47,7 @@ export class CategoryFormComponent implements OnInit , AfterContentChecked {
    submitForm(){
       this.submittingForm = true;
 
-      if(this.currentAction = 'new')
+      if(this.currentAction == 'new')
           this.createCategory();
       else
           this.updateCategory();
@@ -55,9 +55,10 @@ export class CategoryFormComponent implements OnInit , AfterContentChecked {
 
    private setCurrentAction(){
      if(this.route.snapshot.url[0].path == 'new')
-        this.currentAction = 'new'
+        this.currentAction = 'new';
         else
-        this.currentAction = 'edit'
+        this.currentAction = 'edit';
+        console.log("aqui -->", this.currentAction)
     }
       
       
@@ -85,7 +86,7 @@ export class CategoryFormComponent implements OnInit , AfterContentChecked {
       }
 
       private setPageTitle() {
-          if(this.currentAction = 'new'){
+          if(this.currentAction == 'new'){
             this.pageTitle = 'Cadastro de Nova Categoria'
           }else{
             const categoryName = this.category.name || ''
@@ -104,8 +105,15 @@ export class CategoryFormComponent implements OnInit , AfterContentChecked {
       }
        
       private updateCategory() {
-        
+        const category: Category = Object.assign(new Category(), this.category);
+
+        this.categoryService.update(category)
+        .subscribe(
+          category => this.actionsFormSucess(category),
+          error => this.actionsFormError(error)
+        )
       }
+      
       private actionsFormSucess(category: Category){
          toastr.success('Solicitação processada com sucesso!');
 

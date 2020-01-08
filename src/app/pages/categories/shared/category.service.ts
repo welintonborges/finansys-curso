@@ -49,7 +49,7 @@ export class CategoryService {
   }
 
   update(category: Category): Observable<Category>{
-    const url = this.apiPath + "/" + category;
+    const url = this.apiPath + "/" + category.id;
     return this.http.put(url, category).pipe(
       catchError(this.handleError),
       map(() => category)
@@ -64,7 +64,7 @@ export class CategoryService {
        map(() => null)
     )
   }
-
+ 
   private handleError(error: any): Observable<any>{
     console.log("ERRO NA REQUISIÇÃO ->", error);
     return throwError(error);
