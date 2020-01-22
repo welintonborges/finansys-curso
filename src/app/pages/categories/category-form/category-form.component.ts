@@ -14,7 +14,7 @@ import { Category } from '../shared/category.model';
 
 @Component({
   selector: 'app-category-form',
-  templateUrl: './category-form.component.html', 
+  templateUrl: './category-form.component.html',
   styleUrls: ['./category-form.component.css']
 })
 export class CategoryFormComponent implements OnInit , AfterContentChecked {
@@ -45,6 +45,7 @@ export class CategoryFormComponent implements OnInit , AfterContentChecked {
    }
 
    submitForm(){
+    console.log();
       this.submittingForm = true;
 
       if(this.currentAction == 'new')
@@ -60,8 +61,8 @@ export class CategoryFormComponent implements OnInit , AfterContentChecked {
         this.currentAction = 'edit';
         console.log("aqui -->", this.currentAction)
     }
-      
-      
+
+
       private buildCategoryForm(){
         this.categoryForm = this.formBuilder.group({
           id: [null],
@@ -69,10 +70,10 @@ export class CategoryFormComponent implements OnInit , AfterContentChecked {
           description: [null]
         });
       }
-      
+
       private loadCategory(){
         if(this.currentAction == 'edit')
-        
+
         this.route.paramMap.pipe(
           switchMap(params => this.categoryService.getById(+params.get('id')))
           )
@@ -93,17 +94,17 @@ export class CategoryFormComponent implements OnInit , AfterContentChecked {
             this.pageTitle = 'Editando Categoria: ' + categoryName
           }
       }
-     
+
       private createCategory() {
        const category: Category = Object.assign(new Category(), this.categoryForm.value);
-       
+
        this.categoryService.create(category)
        .subscribe(
          category => this.actionsFormSucess(category),
          error => this.actionsFormError(error)
        )
       }
-       
+
       private updateCategory() {
         const category: Category = Object.assign(new Category(), this.category);
 
@@ -113,7 +114,7 @@ export class CategoryFormComponent implements OnInit , AfterContentChecked {
           error => this.actionsFormError(error)
         )
       }
-      
+
       private actionsFormSucess(category: Category){
          toastr.success('Solicitação processada com sucesso!');
 
