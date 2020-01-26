@@ -31,7 +31,7 @@
                 <label for="name">Nome</label>
                 <input type="text" class="form-control" id="name" formControlName="name">
 
-                <div class="text-danger" *ngIf="categoryForm.get('name').invalid && categoryForm.get('name').touched">
+                <div class="text-danger" *ngIf="categoryForm.get('name').invalid && entryForm.get('name').touched">
                     <div *ngIf="categoryForm.get('name').errors.required">Dado obrigatório</div>
                     <div *ngIf="categoryForm.get('name').errors.minlength">Deve ter no minimo 2 caracteres</div>
                 </div>
@@ -52,7 +52,7 @@
             <li *ngFor="let error of serveErrorMessages">{{error}}</li>
         </ul>
 </div>
-    <button  [disabled]="submittingForm || categoryForm.invalid" type="submit" class="btn btn-primary btn lg float-right mt-2">
+    <button  [disabled]="submittingForm || entryForm.invalid" type="submit" class="btn btn-primary btn lg float-right mt-2">
         Salvar
     </button>
  </form>
